@@ -1,44 +1,38 @@
 package com.le30r.practice.model;
 
-import javax.persistence.*;
-import java.util.Objects;
 
-@Entity
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name = "CargoType")
+@Table(name = "CargoType")
 public class CargoType {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "TypeID")
-    private Integer typeId;
-    @Basic
+    private Integer id;
+
     @Column(name = "TypeName")
-    private String typeName;
+    private String name;
 
-    public Integer getTypeId() {
-        return typeId;
+    public CargoType() {
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public Integer getId() {
+        return id;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CargoType cargoType = (CargoType) o;
-        return Objects.equals(typeId, cargoType.typeId) && Objects.equals(typeName, cargoType.typeName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(typeId, typeName);
+    public void setName(String name) {
+        this.name = name;
     }
 }

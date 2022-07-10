@@ -1,44 +1,40 @@
 package com.le30r.practice.model;
 
-import javax.persistence.*;
-import java.util.Objects;
+import org.hibernate.annotations.Nationalized;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "City")
 public class City {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "CityID")
-    private Integer cityId;
-    @Basic
-    @Column(name = "CityName")
-    private String cityName;
+    private int id;
 
-    public Integer getCityId() {
-        return cityId;
+    @Nationalized
+    @Column(name = "CityName", length = 25)
+    private String name;
+
+    public City() {
     }
 
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
+    public int getId() {
+        return id;
     }
 
-    public String getCityName() {
-        return cityName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        City city = (City) o;
-        return Objects.equals(cityId, city.cityId) && Objects.equals(cityName, city.cityName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(cityId, cityName);
+    public void setName(String name) {
+        this.name = name;
     }
 }

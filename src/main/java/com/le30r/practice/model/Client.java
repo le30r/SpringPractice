@@ -1,45 +1,57 @@
 package com.le30r.practice.model;
 
-import javax.persistence.*;
-import java.util.Objects;
+import org.hibernate.annotations.Nationalized;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.math.BigInteger;
 
 @Entity
+@Table(name = "Client")
 public class Client {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "ClientID")
-    private Integer clientId;
-    @Basic
-    @Column(name = "FirstName")
-    private String firstName;
-    @Basic
-    @Column(name = "MiddleName")
-    private String middleName;
-    @Basic
-    @Column(name = "LastName")
-    private String lastName;
-    @Basic
-    @Column(name = "LastDelivery")
-    private String lastDelivery;
-    @Basic
-    @Column(name = "LastShipment")
-    private String lastShipment;
-    @Basic
-    @Column(name = "Phone")
-    private String phone;
-    @Basic
-    @Column(name = "Email")
-    private String email;
-    @OneToOne
-    @JoinColumn(name = "ClientID", referencedColumnName = "ID", nullable = false)
-    private User usersByClientId;
+    private Integer id;
 
-    public Integer getClientId() {
-        return clientId;
+    @Nationalized
+    @Column(name = "FirstName", length = 25)
+    private String firstName;
+
+    @Nationalized
+    @Column(name = "MiddleName", length = 25)
+    private String middleName;
+
+    @Nationalized
+    @Column(name = "LastName", length = 25)
+    private String lastName;
+
+    @Column(name = "Phone")
+    private Long phone;
+
+    @Nationalized
+    @Column(name = "Email", length = 50)
+    private String email;
+
+    @Nationalized
+    @Column(name = "LastDelivery", length = 65)
+    private String lastDelivery;
+
+    @Nationalized
+    @Column(name = "LastShipment", length = 65)
+    private String lastShipment;
+    public Client() {
+
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -66,6 +78,22 @@ public class Client {
         this.lastName = lastName;
     }
 
+    public Long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Long phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getLastDelivery() {
         return lastDelivery;
     }
@@ -80,42 +108,5 @@ public class Client {
 
     public void setLastShipment(String lastShipment) {
         this.lastShipment = lastShipment;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Client client = (Client) o;
-        return Objects.equals(clientId, client.clientId) && Objects.equals(firstName, client.firstName) && Objects.equals(middleName, client.middleName) && Objects.equals(lastName, client.lastName) && Objects.equals(lastDelivery, client.lastDelivery) && Objects.equals(lastShipment, client.lastShipment) && Objects.equals(phone, client.phone) && Objects.equals(email, client.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(clientId, firstName, middleName, lastName, lastDelivery, lastShipment, phone, email);
-    }
-
-    public User getUsersByClientId() {
-        return usersByClientId;
-    }
-
-    public void setUsersByClientId(User usersByClientId) {
-        this.usersByClientId = usersByClientId;
     }
 }
