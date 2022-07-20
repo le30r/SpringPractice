@@ -15,7 +15,7 @@ public class AppController {
     @Autowired
     private CargoRepository cargoRepository;
 
-    @RequestMapping("/cargos")
+    @RequestMapping("/cargo")
     public List<Cargo> getCargos() {
         return cargoRepository.findAll();
     }
